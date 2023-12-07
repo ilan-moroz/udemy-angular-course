@@ -10,7 +10,8 @@
 </button>
 <!-- <p [innerText]="allowNewServer"></p> -->
 <!-- <p>{{ serverName }}</p> -->
-<p *ngIf="serverCreated">{{ serverStatus }}</p>
+<p *ngIf="serverCreated; else noServer">{{ serverStatus }}</p>
+<ng-template #noServer> <p>No server was created</p></ng-template>
 <input
   type="text"
   class="form-control"
