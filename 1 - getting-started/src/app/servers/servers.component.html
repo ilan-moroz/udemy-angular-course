@@ -10,8 +10,14 @@
 </button>
 <!-- <p [innerText]="allowNewServer"></p> -->
 <!-- <p>{{ serverName }}</p> -->
-<p *ngIf="serverCreated; else noServer">{{ serverStatus }}</p>
-<ng-template #noServer> <p>No server was created</p></ng-template>
+<!-- <p *ngIf="serverCreated; else noServer">{{ serverStatus }}</p>
+<ng-template #noServer> <p>No server was created</p></ng-template> -->
+<!-- angular 17 -->
+@if (serverCreated) {
+<p>{{ serverStatus }}</p>
+} @else {
+<p>No server was created</p>
+}
 <input
   type="text"
   class="form-control"
@@ -23,4 +29,8 @@
 </button>
 <p>{{ userStatus }}</p>
 
-<app-server *ngFor="let server of servers"></app-server>
+<!-- <app-server *ngFor="let server of servers"></app-server> -->
+<!-- angular 17 -->
+@for(server of servers;track server){
+<app-server></app-server>
+}
