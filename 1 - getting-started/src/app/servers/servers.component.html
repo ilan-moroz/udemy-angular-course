@@ -9,8 +9,8 @@
   Add Server
 </button>
 <!-- <p [innerText]="allowNewServer"></p> -->
-<p>{{ serverStatus }}</p>
 <!-- <p>{{ serverName }}</p> -->
+<p *ngIf="serverCreated">{{ serverStatus }}</p>
 <input
   type="text"
   class="form-control"
