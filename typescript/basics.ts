@@ -1,124 +1,121 @@
-// // Primitives: number, string, boolean
-// // More complex types: arrays, objects
-// // Function types, parameters
+//* Primitives: number, string, boolean
+//* More complex types: arrays, objects
+//* Function types, parameters
 
-// // Primitives
+//! Primitives
 
-// let age: number;
+let age: number;
 
-// age = 12;
+age = 12;
 
-// let userName: string | string[];
+const userName: string = 'Max';
 
-// userName = 'Max';
+let isInstructor: boolean;
 
-// let isInstructor: boolean;
+isInstructor = true;
 
-// isInstructor = true;
+//! More complex types
 
-// // More complex types
+let hobbies: string[];
 
-// let hobbies: string[];
+hobbies = ['Sports', 'Cooking'];
 
-// hobbies = ['Sports', 'Cooking'];
+type Person = {
+  name: string;
+  age: number;
+};
 
-// type Person = {
-//   name: string;
-//   age: number;
-// };
+let person: Person;
 
-// let person: Person;
+person = {
+  name: 'Max',
+  age: 32,
+};
 
-// person = {
-//   name: 'Max',
-//   age: 32,
-// };
+let people: Person[];
 
-// // person = {
-// //   isEmployee: true
-// // };
+let course: string | number = 'React - The Complete Guide';
 
-// let people: Person[];
+course = 12341;
 
-// // Type inference
+//! Functions & types
 
-// let course: string | number = 'React - The Complete Guide';
+function addNumbers(a: number, b: number) {
+  return a + b;
+}
 
-// course = 12341;
+function printOutput(value: any) {
+  console.log(value);
+}
 
-// // Functions & types
+//! Generics
 
-// function addNumbers(a: number, b: number) {
-//   return a + b;
-// }
+function insertAtBeginning<T>(array: T[], value: T) {
+  const newArray = [value, ...array];
+  return newArray;
+}
 
-// function printOutput(value: any) {
-//   console.log(value);
-// }
+const demoArray = [1, 2, 3];
 
-// // Generics
+const updatedArray = insertAtBeginning(demoArray, -1); // [-1, 1, 2, 3]
+const stringArray = insertAtBeginning(['a', 'b', 'c'], 'd');
 
-// function insertAtBeginning<T>(array: T[], value: T) {
-//   const newArray = [value, ...array];
-//   return newArray;
-// }
+//  updatedArray[0].split('');
+//  stringArray[0].split('');
 
-// const demoArray = [1, 2, 3];
+//! Classes
 
-// const updatedArray = insertAtBeginning(demoArray, -1); // [-1, 1, 2, 3]
-// const stringArray = insertAtBeginning(['a', 'b', 'c'], 'd');
+class Student {
+  // firstName: string;
+  // lastName: string;
+  // age: number;
+  // private courses: string[];
 
-// // updatedArray[0].split('');
+  constructor(
+    public firstName: string,
+    public lastName: string,
+    public age: number,
+    private courses: string[]
+  ) {}
 
-// class Student {
-//   // firstName: string;
-//   // lastName: string;
-//   // age: number;
-//   // private courses: string[];
+  enrol(courseName: string) {
+    this.courses.push(courseName);
+  }
 
-//   constructor(
-//     public firstName: string,
-//     public lastName: string,
-//     public age: number,
-//     private courses: string[]
-//   ) {}
+  listCourses() {
+    return this.courses.slice();
+  }
+}
 
-//   enrol(courseName: string) {
-//     this.courses.push(courseName);
-//   }
+const student = new Student('Max', 'Schwarz', 32, ['Angular']);
+student.enrol('React');
 
-//   listCourses() {
-//     return this.courses.slice();
-//   }
-// }
+// student.listCourses(); => Angular, React
+// student.courses => Angular, React
 
-// const student = new Student('Max', 'Schwarz', 32, ['Angular']);
-// student.enrol('React');
-// // student.listCourses(); => Angular, React
+//! Interface
 
-// // student.courses => Angular, React
+interface Human {
+  firstName: string;
+  age: number;
 
-// interface Human {
-//   firstName: string;
-//   age: number;
+  greet: () => void;
+}
 
-//   greet: () => void;
-// }
+let max: Human;
 
-// let max: Human;
+max = {
+  firstName: 'Max',
+  age: 32,
+  greet() {
+    console.log('Hello!');
+  },
+};
 
-// max = {
-//   firstName: 'Max',
-//   age: 32,
-//   greet() {
-//     console.log('Hello!');
-//   },
-// };
-
-// class Instructor implements Human {
-//   firstName: string;
-//   age: number;
-//   greet() {
-//     console.log('Hello!!!!');
-//   }
-// }
+class Instructor implements Human {
+  firstName: string;
+  age: number;
+  greet() {
+    console.log('Hello!!!!');
+  }
+}
