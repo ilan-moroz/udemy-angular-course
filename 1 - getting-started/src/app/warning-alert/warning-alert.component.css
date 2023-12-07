@@ -1,7 +1,7 @@
 .box {
   background-color: red;
   color: white;
-  width: 30%;
+  width: 60rem;
   display: flex;
   justify-content: center;
   align-items: center;
