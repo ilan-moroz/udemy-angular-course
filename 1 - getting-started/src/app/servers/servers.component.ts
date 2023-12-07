@@ -12,6 +12,9 @@ export class ServersComponent {
   allowNewServer = false;
   serverStatus = 'No server was created';
   serverName = '';
+  userName = '';
+  userStatus = '';
+  isEmpty = true;
 
   constructor() {
     setTimeout(() => {
@@ -21,6 +24,15 @@ export class ServersComponent {
 
   onCreateServer() {
     this.serverStatus = 'Server was created! Name is: ' + this.serverName;
+  }
+
+  onCreateUser() {
+    this.userStatus = `Your user was created! The username is: ${this.userName}`;
+    this.userName = '';
+  }
+
+  setIsEmpty() {
+    this.isEmpty = false;
   }
 
   onUpdateServerName(e: any) {
