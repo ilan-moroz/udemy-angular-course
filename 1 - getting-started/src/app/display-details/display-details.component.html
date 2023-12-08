@@ -10,7 +10,11 @@
 
   @if(showDetails) {
   <p>Secret Password = 'tuna'</p>
-  } @for(click of clicksArray;track click;let i = $index){
+  }
+  <!-- <div *ngIf="showDetails">
+    <p>Secret Password = 'tuna'</p>
+  </div> -->
+  @for(click of clicksArray;track click;let i = $index){
   <p
     [ngStyle]="{ backgroundColor: colorStyle(i) }"
     [ngClass]="{ white: i >= 4 }"
@@ -18,4 +22,12 @@
     {{ click }}
   </p>
   }
+  <!-- <div *ngFor="let click of clicksArray; let i = index">
+    <p
+      [ngStyle]="{ backgroundColor: colorStyle(i) }"
+      [ngClass]="{ white: i >= 4 }"
+    >
+      {{ click }}
+    </p>
+  </div> -->
 </div>
