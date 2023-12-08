@@ -13,7 +13,7 @@ export class DisplayDetailsComponent {
     const d = new Date();
     const n = d.toLocaleTimeString();
     this.showDetails = !this.showDetails;
-    this.clicksArray.unshift(n);
+    this.clicksArray.push(n);
   }
 
   colorStyle(i: number) {
