@@ -10,10 +10,10 @@
 
   @if(showDetails) {
   <p>Secret Password = 'tuna'</p>
-  } @for(click of clicksArray;track click){
+  } @for(click of clicksArray;track click;let i = $index){
   <p
-    [ngStyle]="{ backgroundColor: colorStyle() }"
-    [ngClass]="{ white: clicksLonger === true }"
+    [ngStyle]="{ backgroundColor: colorStyle(i) }"
+    [ngClass]="{ white: i >= 4 }"
   >
     {{ click }}
   </p>
