@@ -7,5 +7,11 @@ import { Recipe } from '../recipe.modal';
   styleUrl: './recipe-list.component.css',
 })
 export class RecipeListComponent {
-  recipes: Recipe[] = [];
+  recipes: Recipe[] = [
+    new Recipe(
+      'Test',
+      'test recipe',
+      'https://marketplace.canva.com/EAFEGwki5iw/2/0/1067w/canva-white-yellow-clean-modern-brulle-cheese-cake-recipe-card-ZLMW2pkhjjg.jpg'
+    ),
+  ];
 }
