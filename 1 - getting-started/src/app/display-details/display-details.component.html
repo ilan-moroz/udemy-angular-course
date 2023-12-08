@@ -1,0 +1,21 @@
+<div style="display: flex; flex-direction: column; align-items: center">
+  <button
+    type="button"
+    class="btn btn-info"
+    style="margin: 10px 0"
+    (click)="onClick()"
+  >
+    Display Details
+  </button>
+
+  @if(showDetails) {
+  <p>Secret Password = 'tuna'</p>
+  } @for(click of clicksArray;track click){
+  <p
+    [ngStyle]="{ backgroundColor: colorStyle() }"
+    [ngClass]="{ white: clicksLonger === true }"
+  >
+    {{ click }}
+  </p>
+  }
+</div>
