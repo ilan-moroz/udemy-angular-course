@@ -7,5 +7,8 @@ import { Ingredient } from '../../shared/ingredient.modal';
   styleUrl: './shopping-list.component.css',
 })
 export class ShoppingListComponent {
-  ingredients: Ingredient[] = [];
+  ingredients: Ingredient[] = [
+    new Ingredient('apple', 5),
+    new Ingredient('tomato', 10),
+  ];
 }
