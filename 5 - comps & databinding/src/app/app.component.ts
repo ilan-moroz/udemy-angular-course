@@ -6,10 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  // Array to store server elements, initially contains one test server
   serverElements = [
     { type: 'server', name: 'test server', content: 'just a test' },
   ];
 
+  // Method to add a new server element, triggered by the serverCreated event
   onServerAdded(data: { serverName: string; serverContent: string }) {
     this.serverElements.push({
       type: 'server',
@@ -18,6 +20,7 @@ export class AppComponent {
     });
   }
 
+  // Method to add a new blueprint element, triggered by the blueprintCreated event
   onBlueprintAdded(data: { serverName: string; serverContent: string }) {
     this.serverElements.push({
       type: 'blueprint',

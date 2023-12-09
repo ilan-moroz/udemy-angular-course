@@ -1,12 +1,19 @@
 <div class="container">
+  <!-- app-cockpit component with event bindings -->
+  <!-- serverCreated and bpCreated are custom events from the CockpitComponent -->
+  <!-- onServerAdded and onBlueprintAdded are methods in the AppComponent -->
+
+  <!-- When serverCreated event is emitted, onServerAdded is called -->
+  <!-- When bpCreated event is emitted, onBlueprintAdded is called -->
   <app-cockpit
     (serverCreated)="onServerAdded($event)"
     (bpCreated)="onBlueprintAdded($event)"
   ></app-cockpit>
-
   <hr />
   <div class="row">
     <div class="col-xs-12">
+      <!-- Loop through each 'element' in the 'serverElements' array -->
+      <!-- 'srvElement' is a property on the app-server-element component -->
       <app-server-element
         *ngFor="let element of serverElements"
         [srvElement]="element"
