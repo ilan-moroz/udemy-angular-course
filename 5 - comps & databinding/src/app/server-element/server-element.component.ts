@@ -4,6 +4,7 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
   selector: 'app-server-element',
   templateUrl: './server-element.component.html',
   styleUrl: './server-element.component.css',
+  // ensures only this component gets the css styles can be overwritten with none
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class ServerElementComponent {
