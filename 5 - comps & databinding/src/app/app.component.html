@@ -32,6 +32,16 @@
           <em *ngIf="element.type === 'blueprint'">{{ element.content }}</em>
         </p>
       </app-server-element>
+      <app-game-control
+        (numIncreased)="onNumIncreased($event)"
+      ></app-game-control>
+      <div *ngFor="let num of numbers">
+        @if(num%2 ===0){
+        <app-even> even : {{ num }} </app-even>
+        }@else {
+        <app-odd> odd : {{ num }} </app-odd>
+        }
+      </div>
     </div>
   </div>
 </div>

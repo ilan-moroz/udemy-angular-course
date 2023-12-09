@@ -36,4 +36,11 @@ export class AppComponent {
   onDestroyFirst() {
     this.serverElements.splice(0, 1);
   }
+
+  numbers: number[] = [];
+
+  onNumIncreased(data: { num: number }) {
+    this.numbers.push(data.num);
+    console.log(this.numbers);
+  }
 }
