@@ -11,6 +11,8 @@ import {
   AfterViewInit,
   AfterViewChecked,
   OnDestroy,
+  ViewChild,
+  ElementRef,
 } from '@angular/core';
 
 @Component({
@@ -35,6 +37,7 @@ export class ServerElementComponent
   // 'srvElement' is an alias for the property when used in binding
   @Input('srvElement') element: { type: string; name: string; content: string };
   @Input() name: string;
+  @ViewChild('heading') header: ElementRef;
 
   constructor() {
     console.log('constructor called');
@@ -69,6 +72,7 @@ export class ServerElementComponent
   ngAfterViewInit() {
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     console.log('ngAfterViewInit called');
+    console.log(this.header.nativeElement.textContent);
   }
 
   ngAfterViewChecked() {
