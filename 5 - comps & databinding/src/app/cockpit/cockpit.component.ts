@@ -19,21 +19,22 @@ export class CockpitComponent {
     serverContent: string;
   }>();
 
-  newServerName = ''; // Binds to input for the server's name
+  // newServerName = ''; // Binds to input for the server's name
   newServerContent = ''; // Binds to input for the server's content
 
   // Method to emit the serverCreated event with the current server data
-  onAddServer() {
+  onAddServer(serverName: HTMLInputElement) {
     this.serverCreated.emit({
-      serverName: this.newServerName,
+      serverName: serverName.value,
       serverContent: this.newServerContent,
     });
+    console.log(serverName.value);
   }
 
   // Method to emit the blueprintCreated event with the current blueprint data
-  onAddBlueprint() {
+  onAddBlueprint(serverName: HTMLInputElement) {
     this.blueprintCreated.emit({
-      serverName: this.newServerName,
+      serverName: serverName.value,
       serverContent: this.newServerContent,
     });
   }
