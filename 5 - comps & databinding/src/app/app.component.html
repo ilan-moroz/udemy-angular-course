@@ -37,9 +37,9 @@
       ></app-game-control>
       <div *ngFor="let num of numbers">
         @if(num%2 ===0){
-        <app-even> even : {{ num }} </app-even>
+        <app-even> Even - {{ num }} </app-even>
         }@else {
-        <app-odd> odd : {{ num }} </app-odd>
+        <app-odd [number]="num"> </app-odd>
         }
       </div>
     </div>

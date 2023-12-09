@@ -9,14 +9,12 @@ export class GameControlComponent {
   startNum = 0;
   interval;
 
-  @Output() numIncreased = new EventEmitter<{
-    num: number;
-  }>();
+  @Output() numIncreased = new EventEmitter<number>();
 
   startGame() {
     this.interval = setInterval(() => {
       this.startNum += 1;
-      this.numIncreased.emit({ num: this.startNum });
+      this.numIncreased.emit(this.startNum);
       // console.log(this.startNum);
     }, 1000);
   }

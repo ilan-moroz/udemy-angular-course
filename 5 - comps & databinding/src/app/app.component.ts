@@ -39,8 +39,8 @@ export class AppComponent {
 
   numbers: number[] = [];
 
-  onNumIncreased(data: { num: number }) {
-    this.numbers.push(data.num);
+  onNumIncreased(num: number) {
+    this.numbers.push(num);
     console.log(this.numbers);
   }
 }
