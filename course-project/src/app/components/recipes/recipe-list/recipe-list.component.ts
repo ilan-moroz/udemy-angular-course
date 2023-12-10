@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { RecipeService } from './../../../services/recipe.service';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Recipe } from '../recipe.modal';
 
 @Component({
@@ -6,18 +7,16 @@ import { Recipe } from '../recipe.modal';
   templateUrl: './recipe-list.component.html',
   styleUrl: './recipe-list.component.css',
 })
-export class RecipeListComponent {
-  chosenRecipe: Recipe;
-
+export class RecipeListComponent implements OnInit {
   @Output() recipeSelected = new EventEmitter<Recipe>();
 
-  recipes: Recipe[] = [
-    new Recipe(
-      'Test',
-      'test recipe',
-      'https://marketplace.canva.com/EAFEGwki5iw/2/0/1067w/canva-white-yellow-clean-modern-brulle-cheese-cake-recipe-card-ZLMW2pkhjjg.jpg'
-    ),
-  ];
+  constructor(private recipeService: RecipeService) {}
+
+  recipes: Recipe[];
+
+  ngOnInit(): void {
+    this.recipes = this.recipeService.getRecipes();
+  }
 
   onRecipeSelect(recipe: Recipe) {
     this.recipeSelected.emit(recipe);
