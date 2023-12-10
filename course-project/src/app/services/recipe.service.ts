@@ -1,10 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Recipe } from '../components/recipes/recipe.modal';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecipeService {
+  constructor() {}
+
   private recipes: Recipe[] = [
     new Recipe(
       'Test',
@@ -13,7 +15,7 @@ export class RecipeService {
     ),
   ];
 
-  constructor() {}
+  recipeSelected = new EventEmitter<Recipe>();
 
   getRecipes() {
     return this.recipes.slice();
