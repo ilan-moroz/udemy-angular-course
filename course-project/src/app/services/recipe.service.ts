@@ -1,12 +1,13 @@
+import { Ingredient } from './../shared/ingredient.modal';
+import { ShoppingListService } from './shopping-list.service';
 import { Injectable, EventEmitter } from '@angular/core';
 import { Recipe } from '../components/recipes/recipe.modal';
-import { Ingredient } from '../shared/ingredient.modal';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecipeService {
-  constructor() {}
+  constructor(private spService: ShoppingListService) {}
 
   private recipes: Recipe[] = [
     new Recipe(
@@ -27,5 +28,9 @@ export class RecipeService {
 
   getRecipes() {
     return this.recipes.slice();
+  }
+
+  addToShoppingList(ingredient: Ingredient) {
+    this.spService.addIngredient(ingredient);
   }
 }

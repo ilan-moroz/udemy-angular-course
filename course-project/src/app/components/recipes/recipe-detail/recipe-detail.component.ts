@@ -1,3 +1,4 @@
+import { RecipeService } from './../../../services/recipe.service';
 import { Recipe } from './../recipe.modal';
 import { Component, Input } from '@angular/core';
 
@@ -8,4 +9,12 @@ import { Component, Input } from '@angular/core';
 })
 export class RecipeDetailComponent {
   @Input() recipe: Recipe;
+
+  constructor(private rService: RecipeService) {}
+
+  onAddToShopping() {
+    for (let ingredient of this.recipe.ingredients) {
+      this.rService.addToShoppingList(ingredient);
+    }
+  }
 }
