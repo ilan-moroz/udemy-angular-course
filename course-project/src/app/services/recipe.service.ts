@@ -7,8 +7,6 @@ import { Recipe } from '../components/recipes/recipe.modal';
   providedIn: 'root',
 })
 export class RecipeService {
-  constructor(private spService: ShoppingListService) {}
-
   private recipes: Recipe[] = [
     new Recipe(
       'Tasty Schnitzel',
@@ -29,6 +27,8 @@ export class RecipeService {
   getRecipes() {
     return this.recipes.slice();
   }
+
+  constructor(private spService: ShoppingListService) {}
 
   addToShoppingList(ingredient: Ingredient) {
     this.spService.addIngredient(ingredient);
