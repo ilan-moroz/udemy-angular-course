@@ -30,7 +30,7 @@ export class RecipeService {
 
   constructor(private spService: ShoppingListService) {}
 
-  addToShoppingList(ingredient: Ingredient) {
-    this.spService.addIngredient(ingredient);
+  addToShoppingList(ingredients: Ingredient[]) {
+    this.spService.addIngredients(ingredients);
   }
 }

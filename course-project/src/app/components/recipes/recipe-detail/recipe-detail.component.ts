@@ -13,8 +13,6 @@ export class RecipeDetailComponent {
   constructor(private rService: RecipeService) {}
 
   onAddToShopping() {
-    for (let ingredient of this.recipe.ingredients) {
-      this.rService.addToShoppingList(ingredient);
-    }
+    this.rService.addToShoppingList(this.recipe.ingredients);
   }
 }
