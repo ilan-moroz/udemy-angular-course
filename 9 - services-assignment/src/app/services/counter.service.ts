@@ -8,11 +8,8 @@ export class CounterService {
 
   constructor() {}
 
-  @HostListener('click') onClick() {
-    this.count++;
-  }
-
   logCount() {
+    this.count++;
     console.log(this.count);
   }
 }
