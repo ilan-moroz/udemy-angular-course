@@ -18,13 +18,20 @@
             {{ odd }}
           </li>
         </div>
-        <ng-template [ngIf]="!onlyOdd">
+        <!-- <ng-template [ngIf]="!onlyOdd">
           <div>
             <li class="list-group-item" *ngFor="let even of evenNumbers">
               {{ even }}
             </li>
           </div>
-        </ng-template>
+        </ng-template> -->
+        <div *appUnless="onlyOdd">
+          <div>
+            <li class="list-group-item" *ngFor="let even of evenNumbers">
+              {{ even }}
+            </li>
+          </div>
+        </div>
       </ul>
       <p appBasicHighlight>Style me with basic directive</p>
       <p [appBetterHighlight]="'red'" defaultColor="yellow">
