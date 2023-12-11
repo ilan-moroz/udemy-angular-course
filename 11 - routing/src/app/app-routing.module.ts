@@ -7,6 +7,7 @@ import { ServerComponent } from './servers/server/server.component';
 import { EditServerComponent } from './servers/edit-server/edit-server.component';
 import { Page404Component } from './page404/page404.component';
 import { NgModule } from '@angular/core';
+import { AuthGuard } from './auth-guard.service';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,6 +18,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'servers',
+    canActivate: [AuthGuard],
     component: ServersComponent,
     children: [
       { path: ':id', component: ServerComponent },
