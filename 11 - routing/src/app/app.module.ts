@@ -28,7 +28,8 @@ const appRoutes: Routes = [
       { path: ':id/edit', component: EditServerComponent },
     ],
   },
-  { path: '**', component: Page404Component },
+  { path: 'not-found', component: Page404Component },
+  { path: '**', redirectTo: '/not-found' },
 ];
 
 @NgModule({
