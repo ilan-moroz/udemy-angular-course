@@ -9,10 +9,4 @@ import { Component, Input } from '@angular/core';
 })
 export class RecipeItemComponent {
   @Input() recipe: Recipe;
-
-  constructor(private recipeService: RecipeService) {}
-
-  onRecipeSelect(recipe: Recipe) {
-    this.recipeService.recipeSelected.emit(this.recipe);
-  }
 }
