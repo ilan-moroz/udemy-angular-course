@@ -1,6 +1,6 @@
 import { Ingredient } from './../shared/ingredient.modal';
 import { ShoppingListService } from './shopping-list.service';
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Recipe } from '../components/recipes/recipe.modal';
 
 @Injectable({
@@ -21,8 +21,6 @@ export class RecipeService {
       [new Ingredient('Buns', 2), new Ingredient('Meat', 1)]
     ),
   ];
-
-  recipeSelected = new EventEmitter<Recipe>();
 
   getRecipes() {
     return this.recipes.slice();
