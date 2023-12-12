@@ -29,11 +29,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     // Subscribing to the Observable to receive emitted values
     this.obsSub = customIntervalObs
       .pipe(
-      filter((data)=>{
-        return true data>0;
-      }),map((data: number) => {
-          return 'round: ' + (data + 1);
-        })
+        filter((data) => +data > 0), // Filter out values where data is greater than 0
+        map((data: number) => 'Round: ' + (data + 1)) // Map the number to a string
       )
       .subscribe(
         (data) => {
@@ -44,7 +41,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           alert(error.message);
         },
         () => {
-          console.log('DONE!@!@!');
+          console.log('Completed!');
         }
       );
   }
