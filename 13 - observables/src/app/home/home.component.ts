@@ -19,16 +19,16 @@ export class HomeComponent implements OnInit, OnDestroy {
       let count = 0;
       setInterval(() => {
         observer.next(count); // Emits the current count value
-        if (count === 2) observer.complete();
-        if (count > 3) observer.error(new Error('count exceeded'));
+        if (count === 3) observer.complete();
+        if (count > 1) observer.error(new Error('count exceeded'));
         count++;
       }, 1000);
     });
 
     // Subscribing to the Observable to receive emitted values
     this.obsSub = customIntervalObs.subscribe(
-      (count) => {
-        console.log(count);
+      (data) => {
+        console.log(data);
       },
       (error) => {
         console.log(error);
