@@ -4,10 +4,12 @@ import { FormsModule } from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
+import { AssignmeentComponent } from './comps/assignmeent/assignmeent.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AssignmeentComponent
   ],
   imports: [
     BrowserModule,
