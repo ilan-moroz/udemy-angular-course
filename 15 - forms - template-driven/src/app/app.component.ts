@@ -51,5 +51,7 @@ export class AppComponent {
     this.user.gender = this.signForm.value.gender;
 
     this.sub = true;
+
+    this.signForm.reset();
   }
 }
