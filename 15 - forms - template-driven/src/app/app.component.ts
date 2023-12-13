@@ -20,6 +20,6 @@ export class AppComponent {
   // }
 
   onSub() {
-    console.log(this.signForm);
+    console.log(this.signForm.value);
   }
 }
