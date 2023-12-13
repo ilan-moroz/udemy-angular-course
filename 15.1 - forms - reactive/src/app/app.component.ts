@@ -8,6 +8,7 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class AppComponent implements OnInit {
   genders = ['male', 'female'];
+  forbiddenUsernames = ['chris', 'anna'];
 
   // Declaration of the FormGroup for the signup form
   signupForm: FormGroup;
@@ -18,7 +19,10 @@ export class AppComponent implements OnInit {
       // Nested FormGroup for user data
       userData: new FormGroup({
         // FormControl for username with required validator
-        username: new FormControl(null, Validators.required),
+        username: new FormControl(null, [
+          Validators.required,
+          this.forbiddenNames.bind(this),
+        ]),
         // FormControl for email with required and email validators
         email: new FormControl(null, [Validators.required, Validators.email]),
       }),
@@ -42,5 +46,12 @@ export class AppComponent implements OnInit {
   onAddHobby() {
     const control = new FormControl(null, Validators.required);
     (<FormArray>this.signupForm.get('hobbies')).push(control);
+  }
+
+  // custom validation
+  forbiddenNames(control: FormControl): { [s: string]: boolean } {
+    if (this.forbiddenUsernames.indexOf(control.value) !== -1)
+      return { nameIsForbidden: true };
+    return null;
   }
 }
