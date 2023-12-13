@@ -22,12 +22,9 @@
         </div>
         <div class="radio" *ngFor="let gender of genders">
           <label>
-            <input
-              type="radio"
-              name="gender"
-              [value]="gender"
-              formControlName="gender"
-            />{{ gender }}
+            <input type="radio" [value]="gender" formControlName="gender" />{{
+              gender
+            }}
           </label>
         </div>
         <button class="btn btn-primary" type="submit">Submit</button>
