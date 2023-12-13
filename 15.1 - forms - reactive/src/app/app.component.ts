@@ -36,6 +36,12 @@ export class AppComponent implements OnInit {
       // FormArray for dynamic form controls
       hobbies: new FormArray([]),
     });
+    // this.signupForm.valueChanges.subscribe((value) => {
+    //   console.log(value);
+    // });
+    // this.signupForm.statusChanges.subscribe((value) => {
+    //   console.log(value);
+    // });
   }
 
   onSub() {
