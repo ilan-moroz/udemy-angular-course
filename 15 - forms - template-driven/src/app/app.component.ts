@@ -16,6 +16,14 @@ export class AppComponent {
     'transStupid',
     'new thing that will be invented tomorrow',
   ];
+  user = {
+    username: '',
+    email: '',
+    secretQuestion: '',
+    answer: '',
+    gender: '',
+  };
+  sub = false;
 
   suggestUserName() {
     const suggestedName = 'Superuser';
@@ -36,6 +44,12 @@ export class AppComponent {
   // }
 
   onSub() {
-    console.log(this.signForm.value);
+    this.user.username = this.signForm.value.userData.username;
+    this.user.email = this.signForm.value.userData.email;
+    this.user.secretQuestion = this.signForm.value.secret;
+    this.user.answer = this.signForm.value.questionAnswer;
+    this.user.gender = this.signForm.value.gender;
+
+    this.sub = true;
   }
 }
