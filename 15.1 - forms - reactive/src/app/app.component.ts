@@ -59,6 +59,7 @@ export class AppComponent implements OnInit {
 
   onSub() {
     console.log(this.signupForm);
+    this.signupForm.reset();
   }
 
   // Helper method to retrieve the FormControls from the hobbies FormArray
