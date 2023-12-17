@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Post } from './post.model';
 import { Injectable } from '@angular/core';
 import { catchError, map } from 'rxjs/operators';
@@ -37,7 +37,11 @@ export class PostsService {
     // Making an HTTP GET request to fetch data
     return (
       this.http
-        .get<{ [key: string]: Post }>(this.baseUrl + '/posts.json')
+        .get<{ [key: string]: Post }>(this.baseUrl + '/posts.json', {
+          headers: new HttpHeaders({
+            'custom-header': 'hello',
+          }),
+        })
         // Using 'pipe' to chain RxJS operators
         .pipe(
           // 'map' is used to transform the incoming data
