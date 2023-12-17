@@ -42,4 +42,8 @@ export class PostsService {
         )
     );
   }
+
+  deleteAllPosts() {
+    return this.http.delete(this.baseUrl + '/posts.json');
+  }
 }
