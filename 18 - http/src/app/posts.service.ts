@@ -22,24 +22,24 @@ export class PostsService {
 
   fetchPosts() {
     // Making an HTTP GET request to fetch data
-    this.http
-      .get<{ [key: string]: Post }>(this.baseUrl + '/posts.json')
-      // Using 'pipe' to chain RxJS operators
-      .pipe(
-        // 'map' is used to transform the incoming data
-        map((responseData) => {
-          const postsArray: Post[] = [];
-          // Iterating over each key in the response object
-          for (const key in responseData) {
-            // Ensuring the key is a direct property of the response object
-            if (responseData.hasOwnProperty(key)) {
-              postsArray.push({ ...responseData[key], id: key });
+    return (
+      this.http
+        .get<{ [key: string]: Post }>(this.baseUrl + '/posts.json')
+        // Using 'pipe' to chain RxJS operators
+        .pipe(
+          // 'map' is used to transform the incoming data
+          map((responseData) => {
+            const postsArray: Post[] = [];
+            // Iterating over each key in the response object
+            for (const key in responseData) {
+              // Ensuring the key is a direct property of the response object
+              if (responseData.hasOwnProperty(key)) {
+                postsArray.push({ ...responseData[key], id: key });
+              }
             }
-          }
-          return postsArray; // Returning the array of Post objects
-        })
-      )
-      // Subscribing to the Observable to receive the processed data
-      .subscribe((posts) => {});
+            return postsArray; // Returning the array of Post objects
+          })
+        )
+    );
   }
 }
