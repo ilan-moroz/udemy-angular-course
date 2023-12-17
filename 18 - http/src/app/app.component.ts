@@ -1,31 +1,40 @@
 import { PostsService } from './posts.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Post } from './post.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   @ViewChild('postForm') postForm: NgForm;
   loadedPosts: Post[] = [];
   isLoading = false;
   error = null;
+  private errSub: Subscription;
 
   constructor(private pService: PostsService) {}
 
   ngOnInit() {
+    this.errSub = this.pService.error.subscribe((errMsg) => {
+      this.error = errMsg;
+    });
     this.fetchPosts();
   }
 
+  // onCreatePost(postData: Post) {
+  //   this.pService.createAndStorePost(postData).subscribe((resData) => {
+  //     const newPost = { ...postData, id: resData.name };
+  //     this.loadedPosts = [...this.loadedPosts, newPost];
+  //     this.postForm.reset();
+  //   });
+  // }
   onCreatePost(postData: Post) {
-    this.pService.createAndStorePost(postData).subscribe((resData) => {
-      const newPost = { ...postData, id: resData.name };
-      this.loadedPosts = [...this.loadedPosts, newPost];
-      this.postForm.reset();
-    });
+    this.pService.createAndStorePost(postData);
+    this.postForm.reset();
   }
 
   onFetchPosts() {
@@ -50,5 +59,9 @@ export class AppComponent implements OnInit {
         console.error(error);
       }
     );
+  }
+
+  ngOnDestroy(): void {
+    this.errSub.unsubscribe();
   }
 }
