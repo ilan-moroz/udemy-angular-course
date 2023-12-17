@@ -14,24 +14,24 @@ export class PostsService {
 
   constructor(private http: HttpClient) {}
 
-  // createAndStorePost(postData: Post) {
-  //   return this.http.post<{ name: string }>(
-  //     this.baseUrl + '/posts.json',
-  //     postData
-  //   );
-  // }
   createAndStorePost(postData: Post) {
-    return this.http
-      .post<{ name: string }>(this.baseUrl + '/posts.json', postData)
-      .subscribe(
-        (resData) => {
-          console.log(resData);
-        },
-        (err) => {
-          this.error.next(err.message);
-        }
-      );
+    return this.http.post<{ name: string }>(
+      this.baseUrl + '/posts.json',
+      postData
+    );
   }
+  // createAndStorePost(postData: Post) {
+  //   return this.http
+  //     .post<{ name: string }>(this.baseUrl + '/posts.json', postData)
+  //     .subscribe(
+  //       (resData) => {
+  //         console.log(resData);
+  //       },
+  //       (err) => {
+  //         this.error.next(err.message);
+  //       }
+  //     );
+  // }
 
   fetchPosts() {
     // Making an HTTP GET request to fetch data
