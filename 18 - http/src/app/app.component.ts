@@ -11,8 +11,8 @@ import { Post } from './post.model';
 export class AppComponent implements OnInit {
   @ViewChild('postForm') postForm: NgForm;
   loadedPosts: Post[] = [];
-
   isLoading = false;
+  error = null;
 
   constructor(private pService: PostsService) {}
 
@@ -40,9 +40,15 @@ export class AppComponent implements OnInit {
 
   private fetchPosts() {
     this.isLoading = true;
-    this.pService.fetchPosts().subscribe((posts) => {
-      this.loadedPosts = posts;
-      this.isLoading = false;
-    });
+    this.pService.fetchPosts().subscribe(
+      (posts) => {
+        this.loadedPosts = posts;
+        this.isLoading = false;
+      },
+      (error) => {
+        this.error = error.message;
+        console.error(error);
+      }
+    );
   }
 }
