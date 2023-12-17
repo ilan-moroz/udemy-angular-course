@@ -43,4 +43,8 @@ export class RecipeEditComponent {
       description: new FormControl(recipeDesc),
     });
   }
+
+  onSub() {
+    console.log(this.recipeForm);
+  }
 }
