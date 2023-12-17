@@ -15,7 +15,9 @@ export class AppComponent implements OnInit {
 
   constructor(private http: HttpClient) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.fetchPosts();
+  }
 
   onCreatePost(postData: { title: string; content: string }) {
     this.http.post(this.url + '/posts.json', postData).subscribe((data) => {
@@ -25,10 +27,16 @@ export class AppComponent implements OnInit {
   }
 
   onFetchPosts() {
-    // Send Http request
+    this.fetchPosts();
   }
 
   onClearPosts() {
     // Send Http request
+  }
+
+  private fetchPosts() {
+    this.http.get(this.url + '/posts.json').subscribe((response) => {
+      console.log(response);
+    });
   }
 }
