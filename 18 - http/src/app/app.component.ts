@@ -27,7 +27,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   onCreatePost(postData: Post) {
     this.pService.createAndStorePost(postData).subscribe((resData) => {
-      const newPost = { ...postData, id: resData.name };
+      console.log(resData);
+      const newPost = { ...postData, id: resData.body.name };
       this.loadedPosts = [newPost, ...this.loadedPosts];
       this.postForm.reset();
     });

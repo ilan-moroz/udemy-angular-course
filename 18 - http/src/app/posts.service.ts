@@ -17,7 +17,8 @@ export class PostsService {
   createAndStorePost(postData: Post) {
     return this.http.post<{ name: string }>(
       this.baseUrl + '/posts.json',
-      postData
+      postData,
+      { observe: 'response' }
     );
   }
   // createAndStorePost(postData: Post) {
