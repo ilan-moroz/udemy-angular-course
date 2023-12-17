@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   loadedPosts: Post[] = [];
   baseUrl =
     'https://anuglar-http-91731-default-rtdb.europe-west1.firebasedatabase.app';
+  isLoading = false;
 
   constructor(private http: HttpClient) {}
 
@@ -39,18 +40,19 @@ export class AppComponent implements OnInit {
   }
 
   private fetchPosts() {
+    this.isLoading = true;
     // Making an HTTP GET request to fetch data
     this.http
       .get<{ [key: string]: Post }>(this.baseUrl + '/posts.json')
+      // Using 'pipe' to chain RxJS operators
       .pipe(
-        // Using 'pipe' to chain RxJS operators
+        // 'map' is used to transform the incoming data
         map((responseData) => {
-          // 'map' is used to transform the incoming data
-          const postsArray: Post[] = []; // Initializing an array to hold Post objects
+          const postsArray: Post[] = [];
+          // Iterating over each key in the response object
           for (const key in responseData) {
-            // Iterating over each key in the response object
+            // Ensuring the key is a direct property of the response object
             if (responseData.hasOwnProperty(key)) {
-              // Ensuring the key is a direct property of the response object
               // Pushing a new Post object to the array
               postsArray.push({ ...responseData[key], id: key });
               // Each Post object includes properties from the response and the key as 'id'
@@ -62,6 +64,7 @@ export class AppComponent implements OnInit {
       // Subscribing to the Observable to receive the processed data
       .subscribe((posts) => {
         this.loadedPosts = posts;
+        this.isLoading = false;
       });
   }
 }
