@@ -11,9 +11,10 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(
     req: HttpRequest<any>, // The outgoing request object to handle
     next: HttpHandler // The next interceptor in the chain or the backend if no interceptors remain
-  ): Observable<HttpEvent<any>> {
     // This function must return an Observable
+  ): Observable<HttpEvent<any>> {
     console.log('req is on the way madafaka🤪🤪'); // Log message for debugging
-    return next.handle(req); // Forward the request to the next handler (or the backend)
+    const modifyReq = req.clone({ headers: req.headers.append('auth', 'xyz') });
+    return next.handle(modifyReq); // Forward the request to the next handler (or the backend)
   }
 }
