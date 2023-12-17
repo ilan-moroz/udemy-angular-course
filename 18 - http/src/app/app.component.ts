@@ -23,10 +23,11 @@ export class AppComponent implements OnInit {
   }
 
   onCreatePost(postData: Post) {
-    this.pService.createAndStorePost(postData).subscribe(() => {
-      this.fetchPosts();
+    this.pService.createAndStorePost(postData).subscribe((resData) => {
+      const newPost = { ...postData, id: resData.name };
+      this.loadedPosts = [...this.loadedPosts, newPost];
+      this.postForm.reset();
     });
-    this.postForm.reset();
   }
 
   onFetchPosts() {
