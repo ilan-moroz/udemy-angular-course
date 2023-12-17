@@ -87,6 +87,6 @@ export class RecipeEditComponent {
   }
 
   onCancel() {
-    this.router.navigate(['../']);
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 }
