@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -35,8 +36,19 @@ export class AppComponent implements OnInit {
   }
 
   private fetchPosts() {
-    this.http.get(this.url + '/posts.json').subscribe((response) => {
-      console.log(response);
-    });
+    this.http
+      .get(this.url + '/posts.json')
+      .pipe(
+        map((responseData) => {
+          const postsArray = [];
+          for (const key in responseData) {
+            postsArray.push({ ...responseData[key], id: key });
+          }
+          return postsArray;
+        })
+      )
+      .subscribe((response) => {
+        console.log(response);
+      });
   }
 }
