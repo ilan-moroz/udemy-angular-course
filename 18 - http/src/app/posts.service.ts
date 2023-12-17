@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Post } from './post.model';
 import { Injectable } from '@angular/core';
 import { catchError, map } from 'rxjs/operators';
@@ -34,6 +34,9 @@ export class PostsService {
   // }
 
   fetchPosts() {
+    let searchParams = new HttpParams();
+    searchParams = searchParams.append('print', 'pretty');
+    searchParams = searchParams.append('custom', 'key');
     // Making an HTTP GET request to fetch data
     return (
       this.http
@@ -41,6 +44,7 @@ export class PostsService {
           headers: new HttpHeaders({
             'custom-header': 'hello',
           }),
+          params: searchParams,
         })
         // Using 'pipe' to chain RxJS operators
         .pipe(
