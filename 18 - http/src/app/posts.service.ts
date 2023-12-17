@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Post } from './post.model';
 import { Injectable } from '@angular/core';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { Subject, throwError } from 'rxjs';
 
 @Injectable({
@@ -69,6 +69,14 @@ export class PostsService {
   }
 
   deleteAllPosts() {
-    return this.http.delete(this.baseUrl + '/posts.json');
+    return this.http
+      .delete(this.baseUrl + '/posts.json', {
+        observe: 'events',
+      })
+      .pipe(
+        tap((event) => {
+          console.log(event);
+        })
+      );
   }
 }
