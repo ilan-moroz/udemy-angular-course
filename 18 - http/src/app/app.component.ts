@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { map } from 'rxjs/operators';
+import { Post } from './post.model';
 
 @Component({
   selector: 'app-root',
@@ -20,10 +21,12 @@ export class AppComponent implements OnInit {
     this.fetchPosts();
   }
 
-  onCreatePost(postData: { title: string; content: string }) {
-    this.http.post(this.url + '/posts.json', postData).subscribe((data) => {
-      console.log(data);
-    });
+  onCreatePost(postData: Post) {
+    this.http
+      .post<{ name: string }>(this.url + '/posts.json', postData)
+      .subscribe((data) => {
+        console.log(data);
+      });
     this.postForm.reset();
   }
 
@@ -36,19 +39,29 @@ export class AppComponent implements OnInit {
   }
 
   private fetchPosts() {
+    // Making an HTTP GET request to fetch data
     this.http
-      .get(this.url + '/posts.json')
+      .get<{ [key: string]: Post }>(this.url + '/posts.json')
       .pipe(
+        // Using 'pipe' to chain RxJS operators
         map((responseData) => {
-          const postsArray = [];
+          // 'map' is used to transform the incoming data
+          const postsArray: Post[] = []; // Initializing an array to hold Post objects
           for (const key in responseData) {
-            postsArray.push({ ...responseData[key], id: key });
+            // Iterating over each key in the response object
+            if (responseData.hasOwnProperty(key)) {
+              // Ensuring the key is a direct property of the response object
+              // Pushing a new Post object to the array
+              postsArray.push({ ...responseData[key], id: key });
+              // Each Post object includes properties from the response and the key as 'id'
+            }
           }
-          return postsArray;
+          return postsArray; // Returning the array of Post objects
         })
       )
-      .subscribe((response) => {
-        console.log(response);
+      .subscribe((posts) => {
+        // Subscribing to the Observable to receive the processed data
+        console.log(posts);
       });
   }
 }
