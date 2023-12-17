@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 })
 export class ShoppingListService {
   ingredientsChanged = new Subject<Ingredient[]>();
+  startedEditing = new Subject<number>();
 
   private ingredients: Ingredient[] = [
     new Ingredient('apple', 5),
