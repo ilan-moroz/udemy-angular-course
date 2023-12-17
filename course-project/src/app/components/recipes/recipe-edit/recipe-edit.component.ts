@@ -60,7 +60,11 @@ export class RecipeEditComponent {
   }
 
   onSub() {
-    console.log(this.recipeForm);
+    if (this.editMode) {
+      this.rService.updateRecipe(this.id, this.recipeForm.value);
+    } else {
+      this.rService.addRecipe(this.recipeForm.value);
+    }
   }
 
   get controls() {
