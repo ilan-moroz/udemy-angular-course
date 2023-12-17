@@ -1,10 +1,12 @@
 import {
   HttpEvent,
+  HttpEventType,
   HttpHandler,
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 export class AuthInterceptor implements HttpInterceptor {
   // The intercept method is required for implementing the HttpInterceptor interface
@@ -14,7 +16,17 @@ export class AuthInterceptor implements HttpInterceptor {
     // This function must return an Observable
   ): Observable<HttpEvent<any>> {
     console.log('req is on the way madafaka🤪🤪'); // Log message for debugging
+    // add headers to request
     const modifyReq = req.clone({ headers: req.headers.append('auth', 'xyz') });
-    return next.handle(modifyReq); // Forward the request to the next handler (or the backend)
+    // Forward the request to the next handler
+    return next.handle(modifyReq).pipe(
+      tap((event) => {
+        console.log(event);
+        if (event.type === HttpEventType.Response) {
+          console.log('res arrived');
+          console.log(event.body);
+        }
+      })
+    );
   }
 }
