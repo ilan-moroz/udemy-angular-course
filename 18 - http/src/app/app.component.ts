@@ -12,7 +12,7 @@ import { Post } from './post.model';
 export class AppComponent implements OnInit {
   @ViewChild('postForm') postForm: NgForm;
   loadedPosts = [];
-  url =
+  baseUrl =
     'https://anuglar-http-91731-default-rtdb.europe-west1.firebasedatabase.app';
 
   constructor(private http: HttpClient) {}
@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
 
   onCreatePost(postData: Post) {
     this.http
-      .post<{ name: string }>(this.url + '/posts.json', postData)
+      .post<{ name: string }>(this.baseUrl + '/posts.json', postData)
       .subscribe((data) => {
         console.log(data);
       });
@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
   private fetchPosts() {
     // Making an HTTP GET request to fetch data
     this.http
-      .get<{ [key: string]: Post }>(this.url + '/posts.json')
+      .get<{ [key: string]: Post }>(this.baseUrl + '/posts.json')
       .pipe(
         // Using 'pipe' to chain RxJS operators
         map((responseData) => {
