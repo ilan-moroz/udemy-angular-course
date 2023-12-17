@@ -1,4 +1,3 @@
-import { Recipe } from './../recipe.modal';
 import { Component } from '@angular/core';
 import { RecipeService } from '../../../services/recipe.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -11,7 +10,6 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class RecipeEditComponent {
   id: number;
-  recipe: Recipe;
   editMode = false;
   recipeForm: FormGroup;
 
