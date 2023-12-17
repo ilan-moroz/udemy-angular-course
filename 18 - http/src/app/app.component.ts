@@ -10,14 +10,17 @@ import { NgForm } from '@angular/forms';
 export class AppComponent implements OnInit {
   @ViewChild('postForm') postForm: NgForm;
   loadedPosts = [];
+  url =
+    'https://anuglar-http-91731-default-rtdb.europe-west1.firebasedatabase.app';
 
   constructor(private http: HttpClient) {}
 
   ngOnInit() {}
 
   onCreatePost(postData: { title: string; content: string }) {
-    // Send Http request
-    console.log(postData);
+    this.http.post(this.url + '/posts.json', postData).subscribe((data) => {
+      console.log(data);
+    });
     this.postForm.reset();
   }
 
