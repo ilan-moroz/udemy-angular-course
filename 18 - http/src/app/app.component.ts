@@ -1,8 +1,6 @@
 import { PostsService } from './posts.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
-import { map } from 'rxjs/operators';
 import { Post } from './post.model';
 
 @Component({
@@ -16,7 +14,7 @@ export class AppComponent implements OnInit {
 
   isLoading = false;
 
-  constructor(private http: HttpClient, private pService: PostsService) {}
+  constructor(private pService: PostsService) {}
 
   ngOnInit() {
     this.fetchPosts();
