@@ -13,11 +13,10 @@ export class PostsService {
   constructor(private http: HttpClient) {}
 
   createAndStorePost(postData: Post) {
-    this.http
-      .post<{ name: string }>(this.baseUrl + '/posts.json', postData)
-      .subscribe((data) => {
-        console.log(data);
-      });
+    return this.http.post<{ name: string }>(
+      this.baseUrl + '/posts.json',
+      postData
+    );
   }
 
   fetchPosts() {

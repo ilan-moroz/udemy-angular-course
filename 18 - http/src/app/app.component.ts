@@ -23,7 +23,9 @@ export class AppComponent implements OnInit {
   }
 
   onCreatePost(postData: Post) {
-    this.pService.createAndStorePost(postData);
+    this.pService.createAndStorePost(postData).subscribe(() => {
+      this.fetchPosts();
+    });
     this.postForm.reset();
   }
 
