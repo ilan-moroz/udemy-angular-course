@@ -11,7 +11,7 @@ import { Post } from './post.model';
 })
 export class AppComponent implements OnInit {
   @ViewChild('postForm') postForm: NgForm;
-  loadedPosts = [];
+  loadedPosts: Post[] = [];
   baseUrl =
     'https://anuglar-http-91731-default-rtdb.europe-west1.firebasedatabase.app';
 
@@ -59,9 +59,9 @@ export class AppComponent implements OnInit {
           return postsArray; // Returning the array of Post objects
         })
       )
+      // Subscribing to the Observable to receive the processed data
       .subscribe((posts) => {
-        // Subscribing to the Observable to receive the processed data
-        console.log(posts);
+        this.loadedPosts = posts;
       });
   }
 }
