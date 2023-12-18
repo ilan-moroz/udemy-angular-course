@@ -29,12 +29,9 @@ export class AuthComponent {
           console.log(resData);
           this.isLoading = false;
         },
-        error: (err) => {
-          console.error(err);
-          switch (err.error.error.message) {
-            case 'EMAIL_EXISTS':
-              this.error = 'This email already exists';
-          }
+        error: (errMsg) => {
+          console.error(errMsg);
+          this.error = errMsg;
           this.isLoading = false;
         },
       });

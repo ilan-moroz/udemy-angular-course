@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError, throwError } from 'rxjs';
 
 interface AuthResponse {
   kind: string;
@@ -20,10 +21,23 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   signUp(email: string, password: string) {
-    return this.http.post<AuthResponse>(this.singUpUrl, {
-      email,
-      password,
-      returnSecureToken: true,
-    });
+    return this.http
+      .post<AuthResponse>(this.singUpUrl, {
+        email,
+        password,
+        returnSecureToken: true,
+      })
+      .pipe(
+        catchError((err) => {
+          let errMsg = 'An unknown error occurred';
+          if (!err.error || !err.error.error)
+            return throwError(() => new Error(errMsg));
+          switch (err.error.error.message) {
+            case 'EMAIL_EXISTS':
+              errMsg = 'This email already exists';
+          }
+          return throwError(() => new Error(errMsg));
+        })
+      );
   }
 }
