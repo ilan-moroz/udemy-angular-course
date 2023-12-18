@@ -65,6 +65,10 @@ export class AuthService {
       );
   }
 
+  logout() {
+    this.user.next(null);
+  }
+
   private handAuth(
     email: string,
     token: string,
