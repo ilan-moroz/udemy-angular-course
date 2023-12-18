@@ -10,6 +10,7 @@ import { AuthService } from '../../services/auth.service';
 export class AuthComponent {
   isLogin = true;
   isLoading = false;
+  error: string = null;
 
   constructor(private auth: AuthService) {}
 
@@ -30,6 +31,10 @@ export class AuthComponent {
         },
         error: (err) => {
           console.error(err);
+          switch (err.error.error.message) {
+            case 'EMAIL_EXISTS':
+              this.error = 'This email already exists';
+          }
           this.isLoading = false;
         },
       });
