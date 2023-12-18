@@ -1,6 +1,7 @@
 import { RecipeService } from './recipe.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Recipe } from '../components/recipes/recipe.modal';
 
 @Injectable({
   providedIn: 'root',
@@ -19,8 +20,10 @@ export class DataStorageService {
   }
 
   fetchRecipes() {
-    this.http.get(this.baseUrl + '/recipes.json').subscribe((res) => {
-      console.log(res);
-    });
+    this.http
+      .get<Recipe[]>(this.baseUrl + '/recipes.json')
+      .subscribe((recipes) => {
+        this.recipeService.setRecipes(recipes);
+      });
   }
 }
