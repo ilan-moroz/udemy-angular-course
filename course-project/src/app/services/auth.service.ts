@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
 
@@ -30,25 +30,32 @@ export class AuthService {
         password,
         returnSecureToken: true,
       })
-      .pipe(
-        catchError((err) => {
-          let errMsg = 'An unknown error occurred';
-          if (!err.error || !err.error.error)
-            return throwError(() => new Error(errMsg));
-          switch (err.error.error.message) {
-            case 'EMAIL_EXISTS':
-              errMsg = 'This email already exists';
-          }
-          return throwError(() => new Error(errMsg));
-        })
-      );
+      .pipe(catchError(this.handleError));
   }
 
   login(email: string, password: string) {
-    return this.http.post<AuthResponse>(this.loginUrl, {
-      email,
-      password,
-      returnSecureToken: true,
-    });
+    return this.http
+      .post<AuthResponse>(this.loginUrl, {
+        email,
+        password,
+        returnSecureToken: true,
+      })
+      .pipe(catchError(this.handleError));
+  }
+
+  private handleError(err: HttpErrorResponse) {
+    let errMsg = 'An unknown error occurred';
+    if (!err.error || !err.error.error)
+      return throwError(() => new Error(errMsg));
+    switch (err.error.error.message) {
+      case 'EMAIL_EXISTS':
+        errMsg = 'This email already exists';
+        break;
+      case 'INVALID_LOGIN_CREDENTIALS':
+        errMsg =
+          'Invalid login credentials. Please check your email and password.';
+        break;
+    }
+    return throwError(() => new Error(errMsg));
   }
 }
