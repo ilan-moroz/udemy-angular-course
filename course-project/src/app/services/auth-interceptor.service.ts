@@ -22,6 +22,7 @@ export class AuthInterceptorService implements HttpInterceptor {
       take(1),
       // Use exhaustMap to wait for the user Observable to complete
       exhaustMap((user) => {
+        if (!user) return next.handle(req);
         const modReq = req.clone({
           params: new HttpParams().set('auth', user.token),
         });
