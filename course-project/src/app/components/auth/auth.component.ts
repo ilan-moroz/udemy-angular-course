@@ -13,5 +13,8 @@ export class AuthComponent {
     this.isLogin = !this.isLogin;
   }
 
-  onSub(form: NgForm) {}
+  onSub(form: NgForm) {
+    console.log(form.value);
+    form.reset();
+  }
 }
