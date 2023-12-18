@@ -26,29 +26,19 @@ export class DataStorageService {
   }
 
   fetchRecipes() {
-    return this.authService.user.pipe(
-      // Take the latest user value from authService's user Subject and complete
-      take(1),
-      // Use exhaustMap to wait for the user Observable to complete
-      // Then, make an HTTP GET request with the user's token as a parameter
-      exhaustMap((user) => {
-        return this.http.get<Recipe[]>(this.baseUrl + '/recipes.json', {
-          params: new HttpParams().set('auth', user.token),
-        });
-      }),
-      // Transform the incoming recipes using 'map'
+    return this.http.get<Recipe[]>(this.baseUrl + '/recipes.json').pipe(
+      // Transform the incoming recipes array using 'map'
       map((recipes) => {
-        // Iterate over each recipe and return an updated object
+        // Iterate over each recipe to ensure it has an ingredients array
         return recipes.map((recipe) => {
-          // Use spread syntax to copy each recipe object
-          // Add an empty ingredients array if the property doesn't exist
+          // If 'ingredients' property is missing, add an empty array
           return {
             ...recipe,
             ingredients: recipe.ingredients ? recipe.ingredients : [],
           };
         });
       }),
-      // Perform a side effect with 'tap': update the recipeService
+      // Perform a side effect with 'tap': Update the recipes in the recipeService
       tap((recipes) => {
         this.recipeService.setRecipes(recipes);
       })
