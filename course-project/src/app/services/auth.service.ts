@@ -23,6 +23,7 @@ export class AuthService {
   loginUrl =
     'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA98UeXOuQGR9PZaxfirTYJcs0YiuEGtlo';
   user = new BehaviorSubject<User>(null);
+  private tokenTimer: any;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -70,6 +71,8 @@ export class AuthService {
     this.user.next(null);
     this.router.navigate(['/auth']);
     localStorage.removeItem('userData');
+    if (this.tokenTimer) clearTimeout(this.tokenTimer);
+    this.tokenTimer = null;
   }
 
   autoLogin() {
@@ -81,7 +84,18 @@ export class AuthService {
       userData._token,
       new Date(userData._tokenExpirationDate)
     );
-    if (loadedUser.token) this.user.next(loadedUser);
+    if (loadedUser.token) {
+      this.user.next(loadedUser);
+      this.autoLogout(
+        new Date(userData._tokenExpirationDate).getTime() - new Date().getTime()
+      );
+    }
+  }
+
+  autoLogout(tokenExpiration: number) {
+    this.tokenTimer = setTimeout(() => {
+      this.logout();
+    }, tokenExpiration);
   }
 
   private handAuth(
@@ -93,6 +107,7 @@ export class AuthService {
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
     const user = new User(email, id, token, expirationDate);
     this.user.next(user);
+    this.autoLogout(expiresIn * 1000);
     localStorage.setItem('userData', JSON.stringify(user));
   }
 
