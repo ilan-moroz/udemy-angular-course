@@ -46,4 +46,8 @@ export class AuthComponent {
       complete: () => this.router.navigate(['/recipes']),
     });
   }
+
+  onHandleError() {
+    this.error = null;
+  }
 }
