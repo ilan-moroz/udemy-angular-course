@@ -4,7 +4,6 @@ import { AuthComponent } from './components/auth/auth.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/recipes', pathMatch: 'full' },
-  { path: 'auth', component: AuthComponent },
   {
     path: 'recipes',
     loadChildren: () =>
@@ -18,6 +17,11 @@ const routes: Routes = [
       import('./components/shopping-list/shopping-list.module').then(
         (mod) => mod.ShoppingListModule
       ),
+  },
+  {
+    path: 'auth',
+    loadChildren: () =>
+      import('./components/auth/auth.module').then((mod) => mod.AuthModule),
   },
 ];
 
