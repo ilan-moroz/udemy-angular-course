@@ -8,7 +8,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthComponent } from './components/auth/auth.component';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
-import { ShoppingListModule } from './components/shopping-list/shopping-list.module';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
@@ -18,7 +17,6 @@ import { SharedModule } from './shared/shared.module';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    ShoppingListModule,
     SharedModule,
   ],
   providers: [
