@@ -27,7 +27,7 @@ export class AuthGuard {
     | UrlTree => {
     // Using RxJS 'pipe' to transform the user observable emitted by authService
     return this.authService.user.pipe(
-      // take just the last parameter and not subscribe to all changes
+      //  only one value (the latest) is taken from the user Observable and then it automatically unsubscribes.
       take(1),
       map((user) => {
         const isAuth = !!user; // Checking if the user object is truthy (authenticated)
