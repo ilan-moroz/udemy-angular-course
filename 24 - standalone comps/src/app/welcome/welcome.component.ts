@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-// import { DetailsComponent } from './details/details.component';
+import { DetailsComponent } from './details/details.component';
 
 @Component({
-  // standalone: true,
+  standalone: true,
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
-  // imports: [DetailsComponent],
+  imports: [DetailsComponent],
 })
 export class WelcomeComponent {}
