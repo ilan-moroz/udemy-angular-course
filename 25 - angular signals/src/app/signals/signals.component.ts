@@ -12,7 +12,8 @@ export class SignalsComponent {
   counter = signal(0);
 
   increment() {
-    this.counter.update(oldCounter => oldCounter + 1);
+    // this.counter.update(oldCounter => oldCounter + 1);
+    this.counter.set(this.counter() + 1);
     this.actions.push('INCREMENT');
   }
 
